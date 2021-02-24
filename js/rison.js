@@ -171,7 +171,7 @@ rison.unquote = function (s) {
             },
             object: function (x) {
                 if (x) {
-                    if (x instanceof Array) {
+                    if (Array.isArray(x)) {
                         return s.array(x);
                     }
                     // WILL: will this work on non-Firefox browsers?
@@ -235,7 +235,7 @@ rison.unquote = function (s) {
      *
      */
     rison.encode_object = function (v) {
-        if (typeof v != 'object' || v === null || v instanceof Array)
+        if (typeof v != 'object' || v === null || Array.isArray(v))
             throw new Error('rison.encode_object expects an object argument');
         var r = s[typeof v](v);
         return r.substring(1, r.length-1);
@@ -246,7 +246,7 @@ rison.unquote = function (s) {
      *
      */
     rison.encode_array = function (v) {
-        if (!(v instanceof Array))
+        if (!(Array.isArray(v)))
             throw new Error('rison.encode_array expects an array argument');
         var r = s[typeof v](v);
         return r.substring(2, r.length-1);
